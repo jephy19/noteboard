@@ -48,13 +48,12 @@ public class CommandValidator {
 
 	private static String validatePin(String[] parts) {
 		if (parts.length != 4) {
-			return "ERROR INVALID_PARAMETER_COUNT PIN <noteId> <x> <y>";
+			return "ERROR INVALID_PARAMETER_COUNT PIN <x> <y>";
 		}
 
 		try {
 			Integer.parseInt(parts[1]);
 			Integer.parseInt(parts[2]);
-			Integer.parseInt(parts[3]);
 		} catch (NumberFormatException e) {
 			return "ERROR PARAMETER_OUT_OF_BOUNDS PIN parameters must be integers";
 		}
