@@ -10,8 +10,8 @@ public class BBoard {
             System.out.println("Usage: java BBoard <port> 100 200 5 4 [green, red, orange, purple, yellow]");
             return;
         }
-
-        int port = Integer.parseInt(args[0]);
+        int port = 0;
+        port = Integer.parseInt(args[0]);
         int boardW = Integer.parseInt(args[1]);
         int boardH = Integer.parseInt(args[2]);
         int noteW = Integer.parseInt(args[3]);
@@ -26,8 +26,8 @@ public class BBoard {
 
         ServerSocket serverSocket = null;
         try {
-            serverSocket = new ServerSocket(0);
-            System.out.println("BBoard running on port " + serverSocket.getLocalPort());
+            serverSocket = new ServerSocket(port);
+            System.out.println("BBoard running on port " + port);
 
 
             while (running) {
