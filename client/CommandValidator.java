@@ -1,4 +1,4 @@
-package client;
+package Client;
 
 public class CommandValidator {
 
@@ -17,11 +17,17 @@ public class CommandValidator {
 		case "POST":
 			return validatePost(parts);
 		case "GET":
-			return parts.length == 1 ? null : "ERROR INVALID_PARAMETER_COUNT GET takes no parameters";
+			return parts.length >= 2 ? null : "ERROR INVALID_FORMAT GET must specify PINS or note";
 		case "PIN":
 			return validatePin(parts);
 		case "UNPIN":
-			return parts.length == 2 ? null : "ERROR INVALID_PARAMETER_COUNT UNPIN <noteId>";
+			return parts.length == 3 ? null : "ERROR INVALID_FORMAT must be UNPIN <x> <y>";
+		case "CLEAR":
+			return null;
+		case "SHAKE":
+			return null;
+		case "DISCONNECT":
+			return null;
 		default:
 			return "ERROR INVALID_FORMAT unknown command";
 		}
@@ -29,14 +35,14 @@ public class CommandValidator {
 
 	private static String validatePost(String[] parts) {
 		if (parts.length < 5) {
-			return "ERROR INVALID_PARAMETER_COUNT POST <x> <y> <color> <message>";
+			return "ERROR INVALID_FORMAT must be POST <x> <y> <color> <message>";
 		}
 
 		try {
 			Integer.parseInt(parts[1]);
 			Integer.parseInt(parts[2]);
 		} catch (NumberFormatException e) {
-			return "ERROR PARAMETER_OUT_OF_BOUNDS x and y must be integers";
+			return "ERROR INVALID_FORMAT x and y must be integers";
 		}
 
 		if (!NoteColor.isValid(parts[3])) {
@@ -47,15 +53,15 @@ public class CommandValidator {
 	}
 
 	private static String validatePin(String[] parts) {
-		if (parts.length != 4) {
-			return "ERROR INVALID_PARAMETER_COUNT PIN <x> <y>";
+		if (parts.length != 3) {
+			return "ERROR INVALID_FORMAT must be PIN <x> <y>";
 		}
 
 		try {
 			Integer.parseInt(parts[1]);
 			Integer.parseInt(parts[2]);
 		} catch (NumberFormatException e) {
-			return "ERROR PARAMETER_OUT_OF_BOUNDS PIN parameters must be integers";
+			return "ERROR INVALID_FORMAT PIN parameters must be integers";
 		}
 
 		return null;

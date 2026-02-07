@@ -7,16 +7,15 @@ public class BBoard {
     public static void main(String[] args) throws Exception {
 
         if (args.length < 6) {
-            System.out.println("Usage: java BBoard <port> 100 200 5 4 [green, red, orange, purple, yellow]");
-            return;
+            System.out.println("Usage: java BBoard <port> <boardW> <boardH> <noteW> <noteH> <colors>"); //
+            System.exit(1);
         }
-        int port = 0;
-        port = Integer.parseInt(args[0]);
+
+        int port = Integer.parseInt(args[0]);
         int boardW = Integer.parseInt(args[1]);
         int boardH = Integer.parseInt(args[2]);
         int noteW = Integer.parseInt(args[3]);
         int noteH = Integer.parseInt(args[4]);
-
         List<String> colors = new ArrayList<>();
         
         for (int i = 5; i < args.length; i++)
